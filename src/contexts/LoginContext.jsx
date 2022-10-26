@@ -8,13 +8,15 @@ const LoginProvider = ({ children }) => {
     const [loginStatus, setLoginStatus] = useState(false)
   
     useEffect(() => {
-      setAccount(window.sessionStorage.getItem("account"))
-      setLoginStatus(window.sessionStorage.getItem("loginStatus") === "true")
+      setAccount(localStorage.getItem("account"))
+      setLoginStatus(localStorage.getItem("loginStatus") === "true")
     }, [])
   
     useEffect(() => {
-      window.sessionStorage.setItem("account", account)
-      window.sessionStorage.setItem("loginStatus", loginStatus)
+      if (loginStatus) {
+        localStorage.setItem("account", account);
+        localStorage.setItem("loginStatus", loginStatus)
+      }
     }, [account, loginStatus])
   
     return (
