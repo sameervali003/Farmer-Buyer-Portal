@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import {Login} from "./Login";
 import { Outlet } from 'react-router';
 
+import { LoginContext } from "../context/LoginContext";
+
 import Button from "./Button";
 
 const NavBar = () => {
+
+  const { account, loginStatus } = useContext(LoginContext);
+
   let Links = [
     { name: "HOME", link: "/" },
     { name: "ABOUT", link: "/about" },
@@ -21,6 +26,10 @@ const NavBar = () => {
   function navigateLogin() {
       navigate("/login");
   };
+
+  function navigateProfile() {
+    navigate("/profile");
+  }
 
   return (
     <>
@@ -62,7 +71,14 @@ const NavBar = () => {
             </li>
           ))}
           <li className="md:ml-8 text-xl md:my-0 my-7">
-            <Button func={navigateLogin}>Login</Button>
+            {
+              !loginStatus ? (
+                <Button func={navigateLogin}>Login</Button>
+              ) :
+              (
+                <Button func={navigateProfile}>Profile</Button>
+              )
+            }
           </li>
         </ul>
       </div>

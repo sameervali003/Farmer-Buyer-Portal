@@ -6,9 +6,12 @@ import About from "./components/About";
 import Login from "./components/Login";
 import Detect from "./components/Detect";
 
+import { LoginProvider } from "./context/LoginContext";
+
+
 function App() {
   return (
-    <>
+    <LoginProvider>
     <BrowserRouter>
         <Routes>
           <Route exact path="login" element={<Login />} />
@@ -19,7 +22,7 @@ function App() {
           </Route> 
         </Routes>
       </BrowserRouter>
-    </>
+    </LoginProvider>
   );
 }
 
