@@ -1,16 +1,29 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import {Login} from "./Login";
+import { Outlet } from 'react-router';
+
 import Button from "./Button";
 
 const NavBar = () => {
   let Links = [
     { name: "HOME", link: "/" },
     { name: "ABOUT", link: "/about" },
-    { name: "DISEASE DETECTION", link: "/" },
+    { name: "DISEASE DETECTION", link: "/detect" },
     { name: "SELL", link: "/" },
     { name: "SHARE", link: "/" },
   ];
+
   let [open, setOpen] = useState(false);
+
+  const navigate = useNavigate();
+ 
+  function navigateLogin() {
+      navigate("/login");
+  };
+
   return (
+    <>
     <div className="shadow-md w-full top-0 sticky">
       <div className="md:flex items-center justify-between bg-opacity-75 py-4 md:px-10 px-7 select-none">
         <div
@@ -36,7 +49,10 @@ const NavBar = () => {
           } overflow-y-auto`}
         >
           {Links.map((link) => (
-            <li key={link.name} className="md:ml-8 text-l md:my-0 my-7 font-sans">
+            <li
+              key={link.name}
+              className="md:ml-8 text-l md:my-0 my-7 font-sans"
+            >
               <a
                 href={link.link}
                 className="text-gray-800 hover:text-black duration-500"
@@ -46,11 +62,13 @@ const NavBar = () => {
             </li>
           ))}
           <li className="md:ml-8 text-xl md:my-0 my-7">
-          <Button>Login</Button>
+            <Button func={navigateLogin}>Login</Button>
           </li>
         </ul>
       </div>
     </div>
+    <Outlet />
+    </>
   );
 };
 
