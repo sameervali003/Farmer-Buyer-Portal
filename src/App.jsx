@@ -1,12 +1,12 @@
 import React from "react"
 import NavBar from "./components/NavBar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./components/Home";
-import About from "./components/About";
-import Login from "./components/Login";
-import Detect from "./components/Detect";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Login from "./pages/Login";
+import Detect from "./pages/Detect";
 
-import { LoginProvider } from "./context/LoginContext";
+import { LoginProvider } from "./contexts/LoginContext";
 
 
 function App() {

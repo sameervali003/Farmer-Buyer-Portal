@@ -1,15 +1,14 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import {Login} from "./Login";
 import { Outlet } from 'react-router';
 
-import { LoginContext } from "../context/LoginContext";
+import { LoginContext } from "../contexts/LoginContext";
 
 import Button from "./Button";
 
 const NavBar = () => {
 
-  const { account, loginStatus } = useContext(LoginContext);
+  const { loginStatus } = useContext(LoginContext);
 
   let Links = [
     { name: "HOME", link: "/" },
