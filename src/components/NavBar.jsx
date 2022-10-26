@@ -15,7 +15,7 @@ const NavBar = () => {
     { name: "ABOUT", link: "/about" },
     { name: "DISEASE DETECTION", link: "/detect" },
     { name: "SELL", link: "/" },
-    { name: "SHARE", link: "/" },
+    { name: "SHARE", link: "/share" },
   ];
 
   let [open, setOpen] = useState(false);
@@ -29,6 +29,7 @@ const NavBar = () => {
   function navigateProfile() {
     navigate("/profile");
   }
+
 
   return (
     <>
