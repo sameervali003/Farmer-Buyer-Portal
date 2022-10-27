@@ -61,7 +61,7 @@ const Login = () => {
 
           axios
             .post("/api/login", {
-              number: user.phoneNumber,
+              number: Number(user.phoneNumber.substring(3)),
             })
             .then(
               (response) => {

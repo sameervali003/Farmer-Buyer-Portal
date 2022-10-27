@@ -70,13 +70,13 @@ function Profile() {
         }, (error) => {
           setMyState("")
           console.log(error)
+          setLoading(false)
         }
         )}
         else {
           alert("Please login!")
           navigate("/login")
         }
-        setLoading(false)
     }, [account, loginStatus])
 
     function locationChange() {
