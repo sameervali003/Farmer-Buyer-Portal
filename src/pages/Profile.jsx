@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useContext, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { LoginContext } from "../contexts/LoginContext";
@@ -6,11 +7,11 @@ function Profile() {
     const navigate = useNavigate()
     const { account, setLoginStatus, loginStatus } = useContext(LoginContext);
 
-    const [myState, setMyState ] = useState("Andaman & Nicobar")
+    const [myState, setMyState ] = useState("")
     const [myCity, setMyCity ] = useState()
+    const [loading, setLoading] = useState(true)
 
-
-    var states = new Array("Andaman & Nicobar", "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chandigarh", "Chhattisgarh", "Dadra & Nagar Haveli", "Daman & Diu", "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu & Kashmir", "Jharkhand", "Karnataka", "Kerala", "Lakshadweep", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Orissa", "Pondicherry", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Tripura", "Uttar Pradesh", "Uttaranchal", "West Bengal");
+    var states = new Array("Andaman & Nicobar", "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chandigarh", "Chhattisgarh", "Dadra & Nagar Haveli", "Daman & Diu", "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu & Kashmir", "Jharkhand", "Karnataka", "Kerala", "Lakshadweep", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Orissa", "Pondicherry", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Tripura", "Uttar Pradesh", "Uttaranchal", "West Bengal", "");
 
     var s_a = new Array();
 
@@ -49,8 +50,46 @@ function Profile() {
     s_a[32]= ['Achhnera', 'Agra', 'Akbarpur', 'Aliganj', 'Aligarh', 'Allahabad', 'Ambedkar Nagar', 'Amethi', 'Amiliya', 'Amroha', 'Anola', 'Atrauli', 'Auraiya', 'Azamgarh', 'Baberu', 'Badaun', 'Baghpat', 'Bagpat', 'Baheri', 'Bahraich', 'Ballia', 'Balrampur', 'Banda', 'Bansdeeh', 'Bansgaon', 'Bansi', 'Barabanki', 'Bareilly', 'Basti', 'Bhadohi', 'Bharthana', 'Bharwari', 'Bhogaon', 'Bhognipur', 'Bidhuna', 'Bijnore', 'Bikapur', 'Bilari', 'Bilgram', 'Bilhaur', 'Bindki', 'Bisalpur', 'Bisauli', 'Biswan', 'Budaun', 'Budhana', 'Bulandshahar', 'Bulandshahr', 'Capianganj', 'Chakia', 'Chandauli', 'Charkhari', 'Chhata', 'Chhibramau', 'Chirgaon', 'Chitrakoot', 'Chunur', 'Dadri', 'Dalmau', 'Dataganj', 'Debai', 'Deoband', 'Deoria', 'Derapur', 'Dhampur', 'Domariyaganj', 'Dudhi', 'Etah', 'Etawah', 'Faizabad', 'Farrukhabad', 'Fatehpur', 'Firozabad', 'Garauth', 'Garhmukteshwar', 'Gautam Buddha Nagar', 'Ghatampur', 'Ghaziabad', 'Ghazipur', 'Ghosi', 'Gonda', 'Gorakhpur', 'Gunnaur', 'Haidergarh', 'Hamirpur', 'Hapur', 'Hardoi', 'Harraiya', 'Hasanganj', 'Hasanpur', 'Hathras', 'Jalalabad', 'Jalaun', 'Jalesar', 'Jansath', 'Jarar', 'Jasrana', 'Jaunpur', 'Jhansi', 'Jyotiba Phule Nagar', 'Kadipur', 'Kaimganj', 'Kairana', 'Kaisarganj', 'Kalpi', 'Kannauj', 'Kanpur', 'Karchhana', 'Karhal', 'Karvi', 'Kasganj', 'Kaushambi', 'Kerakat', 'Khaga', 'Khair', 'Khalilabad', 'Kheri', 'Konch', 'Kumaon', 'Kunda', 'Kushinagar', 'Lalganj', 'Lalitpur', 'Lucknow', 'Machlishahar', 'Maharajganj', 'Mahoba', 'Mainpuri', 'Malihabad', 'Mariyahu', 'Math', 'Mathura', 'Mau', 'Maudaha', 'Maunathbhanjan', 'Mauranipur', 'Mawana', 'Meerut', 'Mehraun', 'Meja', 'Mirzapur', 'Misrikh', 'Modinagar', 'Mohamdabad', 'Mohamdi', 'Moradabad', 'Musafirkhana', 'Muzaffarnagar', 'Nagina', 'Najibabad', 'Nakur', 'Nanpara', 'Naraini', 'Naugarh', 'Nawabganj', 'Nighasan', 'Noida', 'Orai', 'Padrauna', 'Pahasu', 'Patti', 'Pharenda', 'Phoolpur', 'Phulpur', 'Pilibhit', 'Pitamberpur', 'Powayan', 'Pratapgarh', 'Puranpur', 'Purwa', 'Raibareli', 'Rampur', 'Ramsanehi Ghat', 'Rasara', 'Rath', 'Robertsganj', 'Sadabad', 'Safipur', 'Sagri', 'Saharanpur', 'Sahaswan', 'Sahjahanpur', 'Saidpur', 'Salempur', 'Salon', 'Sambhal', 'Sandila', 'Sant Kabir Nagar', 'Sant Ravidas Nagar', 'Sardhana', 'Shahabad', 'Shahganj', 'Shahjahanpur', 'Shikohabad', 'Shravasti', 'Siddharthnagar', 'Sidhauli', 'Sikandra Rao', 'Sikandrabad', 'Sitapur', 'Siyana', 'Sonbhadra', 'Soraon', 'Sultanpur', 'Tanda', 'Tarabganj', 'Tilhar', 'Unnao', 'Utraula', 'Varanasi', 'Zamania']
     s_a[33]= ['Almora', 'Bageshwar', 'Bhatwari', 'Chakrata', 'Chamoli', 'Champawat', 'Dehradun', 'Deoprayag', 'Dharchula', 'Dunda', 'Haldwani', 'Haridwar', 'Joshimath', 'Karan Prayag', 'Kashipur', 'Khatima', 'Kichha', 'Lansdown', 'Munsiari', 'Mussoorie', 'Nainital', 'Pantnagar', 'Partapnagar', 'Pauri Garhwal', 'Pithoragarh', 'Purola', 'Rajgarh', 'Ranikhet', 'Roorkee', 'Rudraprayag', 'Tehri Garhwal', 'Udham Singh Nagar', 'Ukhimath', 'Uttarkashi']
     s_a[34]= ['Adra', 'Alipurduar', 'Amlagora', 'Arambagh', 'Asansol', 'Balurghat', 'Bankura', 'Bardhaman', 'Basirhat', 'Berhampur', 'Bethuadahari', 'Birbhum', 'Birpara', 'Bishanpur', 'Bolpur', 'Bongoan', 'Bulbulchandi', 'Burdwan', 'Calcutta', 'Canning', 'Champadanga', 'Contai', 'Cooch Behar', 'Daimond Harbour', 'Dalkhola', 'Dantan', 'Darjeeling', 'Dhaniakhali', 'Dhuliyan', 'Dinajpur', 'Dinhata', 'Durgapur', 'Gangajalghati', 'Gangarampur', 'Ghatal', 'Guskara', 'Habra', 'Haldia', 'Harirampur', 'Harishchandrapur', 'Hooghly', 'Howrah', 'Islampur', 'Jagatballavpur', 'Jalpaiguri', 'Jhalda', 'Jhargram', 'Kakdwip', 'Kalchini', 'Kalimpong', 'Kalna', 'Kandi', 'Karimpur', 'Katwa', 'Kharagpur', 'Khatra', 'Krishnanagar', 'Mal Bazar', 'Malda', 'Manbazar', 'Mathabhanga', 'Medinipur', 'Mekhliganj', 'Mirzapur', 'Murshidabad', 'Nadia', 'Nagarakata', 'Nalhati', 'Nayagarh', 'Parganas', 'Purulia', 'Raiganj', 'Rampur Hat', 'Ranaghat', 'Seharabazar', 'Siliguri', 'Suri', 'Takipur', 'Tamluk']
-  
-    return loginStatus ? (
+    s_a[35]= ['']
+
+    useEffect(() => {
+      if (loginStatus) {
+        const number = Number(account.substring(3));
+        axios.get('/api/location', { params: { number: number } })
+        .then((res) => {
+          console.log(res.data)
+          const { city, state } = res.data
+          if (city && state) {
+            setMyCity(city)
+            setMyState(state)
+            console.log(myCity)
+          } else {
+            setMyState("")
+          }
+          setLoading(false)
+        }, (error) => {
+          setMyState("")
+          console.log(error)
+        }
+        )}
+        else {
+          alert("Please login!")
+          navigate("/login")
+        }
+        setLoading(false)
+    }, [account, loginStatus])
+
+    function locationChange() {
+      if (loginStatus && (myCity && myState) && (myCity !== '' || myState !== '')) {
+        axios.post('/api/location', { number: Number(account.substring(3)), city: myCity, state: myState })
+        .then((res) => console.log(res))
+        .catch((error) => console.log(error))
+      } else {
+        alert("Please provide valid input!")
+      }
+    }
+
+    return !loading ? (
     <>
     <div className="mt-10 mx-10">
         <h1 className='font-serif text-base'> Login Information </h1>
@@ -60,8 +99,8 @@ function Profile() {
                 <label className="mt-4">Phone Number</label>
                 <input className="border-2 border-gray-300 p-2 rounded-lg" type="text" value={account} disabled/>
 
-                <label className="mt-4">Enter your State</label>
-                <select className="border-2 border-gray-300 p-2 rounded-lg mt-4" onChange={(e) => setMyState(e.target.value)}>
+                <label className="mt-4">My State</label>
+                <select className="border-2 border-gray-300 p-2 rounded-lg mt-4" defaultValue={myState} onChange={(e) => setMyState(e.target.value)}>
                 {
                   states.map( (state, index)=>(
                    <option key={index} value={state}> {state}</option>
@@ -69,8 +108,8 @@ function Profile() {
                 }
                 </select>
                 
-                <label className="mt-4">Enter your City</label>
-                <select className="border-2 border-gray-300 p-2 rounded-lg mt-4" onChange={(e) => setMyCity(e.target.value)}>
+                <label className="mt-4">My City</label>
+                <select className="border-2 border-gray-300 p-2 rounded-lg mt-4" defaultValue={myCity} onChange={(e) => setMyCity(e.target.value)}>
                 { 
                   s_a[states.indexOf(myState)].map( (city, index)=>(
                    <option key={index} value={city}> {city}</option>
@@ -78,9 +117,11 @@ function Profile() {
                 }
                 </select>
 
-                <button className="w-1/3 bg-blue-500 text-white px-4 py-2 rounded font-medium mt-6">Update Location</button>
+                <button className="w-1/3 bg-blue-500 text-white px-4 py-2 rounded font-medium mt-6" type="button" onClick={locationChange}>Update Location</button>
 
                 <button className="w-1/3 py-2 my-4 rounded-lg bg-green-400 to-blue-500 hover:bg-green-500" onClick={() => {
+                    localStorage.removeItem("loginStatus")
+                    localStorage.removeItem("account")
                     setLoginStatus(false)
                     navigate('/')
                 }}>Logout</button>
@@ -89,11 +130,7 @@ function Profile() {
         </form>
     </div>
     </>
-  ) : (
-    <>
-    <h1>Login First!</h1>    
-    </>
-  )
+  ): (<h1>Loading!!!</h1>)
 }
 
 export default Profile

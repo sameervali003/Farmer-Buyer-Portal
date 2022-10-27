@@ -57,7 +57,7 @@ const Login = () => {
           const user = result.user;
           console.log(user.phoneNumber);
           setAccount(user.phoneNumber);
-          setLoginStatus("true");
+          setLoginStatus(true);
 
           axios
             .post("/api/login", {

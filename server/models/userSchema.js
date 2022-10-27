@@ -5,7 +5,10 @@ const userSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    location: {
+    state: {
+        type: String
+    },
+    city: {
         type: String
     }
 })

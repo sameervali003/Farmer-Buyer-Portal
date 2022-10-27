@@ -5,12 +5,12 @@ const LoginContext = createContext()
 const LoginProvider = ({ children }) => {
 
     const [account, setAccount] = useState("")
-    const [loginStatus, setLoginStatus] = useState(false)
+    const [loginStatus, setLoginStatus] = useState()
   
     useEffect(() => {
       setAccount(localStorage.getItem("account"))
       setLoginStatus(localStorage.getItem("loginStatus") === "true")
-    }, [])
+    }, [account, loginStatus])
   
     useEffect(() => {
       if (loginStatus) {
