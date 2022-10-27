@@ -14,7 +14,6 @@ const NavBar = () => {
     { name: "HOME", link: "/" },
     { name: "ABOUT", link: "/about" },
     { name: "DISEASE DETECTION", link: "/detect" },
-    { name: "SELL", link: "/" },
     { name: "SHARE", link: "/share" },
   ];
 
@@ -33,7 +32,7 @@ const NavBar = () => {
 
   return (
     <>
-    <div className="shadow-md w-full top-0 sticky">
+    <div className="shadow-md w-full top-0 sticky bg-green-50">
       <div className="md:flex items-center justify-between bg-opacity-75 py-4 md:px-10 px-7 select-none">
         <div
           className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] 

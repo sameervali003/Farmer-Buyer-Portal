@@ -5,9 +5,9 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Login from "./pages/Login";
 import Detect from "./pages/Detect";
-import Share from "./components/Share";
+import Share from "./pages/Share";
 import Profile from "./pages/Profile";
-
+import Lend from "./pages/Lend";
 import { LoginProvider } from "./contexts/LoginContext";
 
 
@@ -23,6 +23,7 @@ function App() {
           <Route exact path="detect" element={<Detect />} />
           <Route exact path="share" element={<Share />} />
           <Route exact path="profile" element={<Profile />} />
+          <Route exact path="lend" element={<Lend />} />
           </Route> 
         </Routes>
       </BrowserRouter>
