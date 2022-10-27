@@ -12,7 +12,6 @@ app.use(express.json());
 
 app.use(require('./router/user'))
 app.use(require('./router/tool'))
-app.use(require('./router/upload'))
 
 app.listen(5000, () => {
     console.log("Running on port: 5000");

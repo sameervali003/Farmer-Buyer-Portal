@@ -21,9 +21,6 @@ router.post("/api/tool", upload.single("file"), (req, res) => {
       if (!owner || !type || !price || !description) {
         return res.status(422).json({ error: "Please add all the fields" });
       }
-      const image = {
-        file: { data: req.file.buffer, contentType: req.file.mimetype },
-      };
       const tool = new Tool({
         owner,
         type,
@@ -54,10 +51,10 @@ router.post("/api/tool", upload.single("file"), (req, res) => {
 // get all tools by the owner
 router.get("/api/tool", (req, res) => {
   const { owner, type } = req.query;
-  if (!owner) {
-    return res.status(422).json({ error: "Please specify an owner" });
+  const filter = {}
+  if (owner) {
+    filter.owner = owner;
   }
-  const filter = { owner: owner };
   if (type) {
     filter.type = type;
   }
