@@ -10,6 +10,7 @@ import Profile from "./pages/Profile";
 import Lend from "./pages/Lend";
 import Tool from "./pages/Tool";
 import { LoginProvider } from "./contexts/LoginContext";
+import MyTools from "./pages/MyTools";
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Route exact path="profile" element={<Profile />} />
           <Route exact path="lend" element={<Lend />} />
           <Route exact path="tool/:id" element={<Tool />} />
+          <Route exact path="mytools" element={<MyTools />} />
           </Route> 
         </Routes>
       </BrowserRouter>

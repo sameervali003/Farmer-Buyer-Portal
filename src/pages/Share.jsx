@@ -70,7 +70,8 @@ const Share = () => {
 
   return !loading ? (
     <>
-      <div className="grid grid-cols-7  gap-2 mx-2 mb-2 mt-5">
+    <div className="bg-gradient-to-l from-teal-100 via-violet-100 to-lime-200">
+      <div className="grid grid-cols-7  gap-2 mx-2 mb-2 mt-5 ">
         {tools.map((tool, index) => (
           <button
             key={index}
@@ -89,6 +90,7 @@ const Share = () => {
         >
           +
         </button>
+      </div>
       </div>
 
       <div className=" grid xs:grid-cols-2 grid-cols-1 gap-4 mx-2 mb-6">
