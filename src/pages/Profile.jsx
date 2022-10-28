@@ -3,6 +3,7 @@ import React, { useContext, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { LoginContext } from "../contexts/LoginContext";
 import {states , s_a} from '../utils/cities.js'
+
 function Profile() {
     const navigate = useNavigate()
     const { account, setLoginStatus, loginStatus } = useContext(LoginContext);

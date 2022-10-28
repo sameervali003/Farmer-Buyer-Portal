@@ -1,21 +1,24 @@
 import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { LoginContext } from "../contexts/LoginContext";
-import {states , s_a} from '../utils/cities'
+import { states, s_a } from "../utils/cities";
 import ProductCard from "../components/ProductCard";
 
 const Share = () => {
   function navigateLand() {
     window.open("/lend", "_blank");
   }
-  
+
   // const { account, loginStatus } = useContext(LoginContext);
   const [type, setType] = useState();
   const [prods, setProds] = useState([]);
-  const [myState, setMyState ] = useState("")
-  const [myCity, setMyCity ] = useState()
+  const [myState, setMyState] = useState("");
+  const [myCity, setMyCity] = useState();
+
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    setLoading(true)
     axios
       .get("/api/tool", {
         params: {
@@ -24,11 +27,36 @@ const Share = () => {
         },
       })
       .then((response) => {
-        setProds(response.data.savedTools);
-      });
-  }, [type]);
-
-  
+        const savedTools = response.data.savedTools;
+        let filteredTools = [];
+        
+        if (myCity !== undefined) {savedTools.forEach((tool, index) => {
+          axios
+            .get("/api/user", {
+              params: {
+                _id: tool.owner,
+              },
+            })
+            .then((response) => {
+              const user = response.data.savedUser;
+              const city = user.city;
+              if (city == myCity) {
+                filteredTools.push(tool);
+              }
+              if (index == savedTools.length - 1) {
+                setProds(filteredTools);
+                setLoading(false)
+                console.log(filteredTools);
+              }
+            })
+            .catch((err) => console.log(err));
+        })
+       } else { 
+        setProds(savedTools)
+        setLoading(false)
+       }
+      }) 
+  }, [type, myCity]);
 
   const tools = [
     "All",
@@ -40,7 +68,7 @@ const Share = () => {
     "Seed Drill",
   ];
 
-  return (
+  return !loading ? (
     <>
       <div className="grid grid-cols-7  gap-2 mx-2 mb-2 mt-5">
         {tools.map((tool, index) => (
@@ -53,7 +81,7 @@ const Share = () => {
           </button>
         ))}
       </div>
-       
+
       <div className="w-full sm:right-0 sm:w-20 bottom-0 my-10 fixed">
         <button
           className="w-full bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br text-white font-bold text-2xl py-2 rounded-full"
@@ -63,37 +91,40 @@ const Share = () => {
         </button>
       </div>
 
-<div className=" grid xs:grid-cols-2 grid-cols-1 gap-4 mx-2">
-<div>
-<label className="mt-4 font-mono block">State</label>
-<select className="border-2 border-gray-300 p-2 rounded-lg mt-4 w-full" defaultValue={myState} onChange={(e) => setMyState(e.target.value)}>
-                {
-                  states.map( (state, index)=>(
-                   <option key={index} value={state}> {state}</option>
-                     ))
-                }
-                </select>
-</div>
-<div>
-<label className="mt-4 font-sans block">My City</label>
-<select className="border-2 border-gray-300 p-2 rounded-lg mt-4 w-full" defaultValue={myCity} onChange={(e) => setMyCity(e.target.value)}>
-                { 
-                  s_a[states.indexOf(myState)].map( (city, index)=>(
-                   <option key={index} value={city}> {city}</option>
-                     ))
-                }
-                </select>
-</div>
+      <div className=" grid xs:grid-cols-2 grid-cols-1 gap-4 mx-2 mb-6">
+        <div>
+          <label className="mt-4 font-mono block">State</label>
+          <select
+            className="border-2 border-gray-300 p-2 rounded-lg mt-4 w-full"
+            defaultValue={myState}
+            onChange={(e) => setMyState(e.target.value)}
+          >
+            {states.map((state, index) => (
+              <option key={index} value={state}>
+                {" "}
+                {state}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label className="mt-4 font-sans block">My City</label>
+          <select
+            className="border-2 border-gray-300 p-2 rounded-lg mt-4 w-full"
+            defaultValue={myCity}
+            onChange={(e) => setMyCity(e.target.value)}
+          > 
+            {s_a[states.indexOf(myState)].map((city, index) => (
+              <option key={index} value={city}>
+                {" "}
+                {city}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
 
-
-
-</div>
-
-<button type="button" className="block mx-auto text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 mt-2 mb-4 py-2 px-4 rounded">
-  Filter
-</button>
-      
-      <div class="px-2 pb-2 grid md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-2 my-2 mx-2">
+      <div className="px-2 pb-2 grid md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-2 my-2 mx-2">
         {prods.map((prod, index) => (
           <ProductCard
             className="px-5 w-60 h-100"
@@ -108,7 +139,7 @@ const Share = () => {
         ))}
       </div>
     </>
-  );
+  ) : (<h1>Loading...</h1>);
 };
 
 export default Share;

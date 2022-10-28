@@ -22,10 +22,6 @@ const ToolSchema = new mongoose.Schema(
         file: {
             data: Buffer,
             contentType: String,
-        },
-        sold: {
-            type: Boolean,
-            default: false
         }
     },
     { timestamps: true }
