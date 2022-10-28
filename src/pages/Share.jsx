@@ -23,16 +23,15 @@ const Share = () => {
     axios
       .get("/api/tool", {
         params: {
-          type: type,
-          sold: false,
-        },
+          type: type
+        }
       })
       .then((response) => {
         const savedTools = response.data.savedTools;
         let filteredTools = [];
-        
         if (myCity !== undefined) {
           if (savedTools.length === 0) {
+            console.log("No tools found")
             setLoading(false)
           } 
           savedTools.forEach((tool, index) => {

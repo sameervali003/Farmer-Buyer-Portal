@@ -1,11 +1,21 @@
 import { useContext } from "react";
 import { LoginContext } from "../contexts/LoginContext";
+import axios from 'axios'
 
 const DeleteCard = ({ description, type, owner, file, price, id }) => {
     const { account, loginStatus } = useContext(LoginContext);
 
     const blob = new Blob([Int8Array.from(file.data.data)], {type: file.contentType});
     const image = window.URL.createObjectURL(blob);
+
+    function deleteTool() {
+        axios.delete('/api/tool', {params: {_id: id}}).then((response) => {
+            console.log(response)
+        }).catch(err => {
+            console.log(err)
+        })
+        window.location.reload(false)
+    }
 
     return (
         <div className=" max-w-xs  bg-white rounded-lg shadow-md dark:bg-gray-400 dark:border-gray-700">
@@ -15,7 +25,7 @@ const DeleteCard = ({ description, type, owner, file, price, id }) => {
             <h5 className=" text-sm font-semibold tracking-tight text-gray-900 dark:text-white">{description}</h5>
         <div className="flex justify-between items-center">
             <span className="text-sm font-bold text-gray-900 dark:text-white">&#x20B9;{" "+price}</span>
-            <button type="button"  className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-3 py-2 text-center mr-2 mb-2 ">Delete</button>
+            <button type="button" onClick={deleteTool} className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-3 py-2 text-center mr-2 mb-2 ">Delete</button>
         </div>
     </div>
 </div>

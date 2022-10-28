@@ -58,4 +58,14 @@ router.get("/api/tool", (req, res) => {
   });
 });
 
+// delete tool
+router.delete("/api/tool", (req, res) => {
+  Tool.findByIdAndDelete(req.query._id).then((tool) => {
+    if (!tool) {
+      return res.status(422).json({ error: "No tools found" });
+    }
+    return res.status(200).json({ tool });
+  });
+});
+
 module.exports = router;
