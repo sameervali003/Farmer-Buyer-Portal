@@ -38,7 +38,7 @@ function Profile() {
 
     function locationChange() {
       if (loginStatus && (myCity && myState) && (myCity !== '' || myState !== '')) {
-        axios.post('/api/location', { number: Number(account.substring(3)), city: myCity, state: myState })
+        axios.put('/api/user', { number: Number(account.substring(3)), city: myCity, state: myState })
         .then((res) => console.log(res))
         .catch((error) => console.log(error))
       } else {
