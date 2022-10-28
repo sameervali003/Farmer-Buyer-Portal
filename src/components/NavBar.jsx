@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import DropdownButton from "./DropdownButton";
 import { useNavigate } from "react-router-dom";
 import { Outlet } from 'react-router';
 
@@ -75,7 +76,7 @@ const NavBar = () => {
                 <Button func={navigateLogin}>Login</Button>
               ) :
               (
-                <Button func={navigateProfile}>Profile</Button>
+                <DropdownButton menuItems={[{name: "Profile", href: "/profile"}, {name: "Logout", href: "/logout"}]}>User</DropdownButton>
               )
             }
           </li>

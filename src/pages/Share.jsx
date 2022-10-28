@@ -38,7 +38,7 @@ const Share = () => {
 
   return (
     <>
-      <div className="grid md:grid-cols-7 sm:grid-cols-3 xs:grid-cols-2 gap-2 mx-2 mb-10 mt-5">
+      <div className="grid grid-cols-7  gap-2 mx-2 mb-10 mt-5">
         {tools.map((tool, index) => (
           <button
             key={index}

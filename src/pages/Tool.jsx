@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import axios from 'axios'
 import { useEffect, useState } from 'react';
+import Loading from '../components/Loading';
 
 const Tool = () => {
     const { id } = useParams();
@@ -47,7 +48,7 @@ const Tool = () => {
   
         </div>
 </div>
-    ) : <h1>Loading...</h1>;
+    ) : <Loading className="mt-90" />;
 }
 
 export default Tool
