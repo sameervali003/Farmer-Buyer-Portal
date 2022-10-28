@@ -32,7 +32,7 @@ const NavBar = () => {
 
   return (
     <>
-    <div className="shadow-md w-full top-0 sticky bg-green-50">
+    <div className="shadow-md w-full top-0 sticky ">
       <div className="md:flex items-center justify-between bg-opacity-75 py-4 md:px-10 px-7 select-none">
         <div
           className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] 

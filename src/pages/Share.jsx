@@ -8,7 +8,7 @@ const Share = () => {
   function navigateLand() {
     window.open("/lend", "_blank");
   }
-
+  
   // const { account, loginStatus } = useContext(LoginContext);
   const [type, setType] = useState();
   const [prods, setProds] = useState([]);

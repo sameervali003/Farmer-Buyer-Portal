@@ -1,5 +1,6 @@
 import React , {useState} from 'react'
 
+
 function Detect() {
   const [file, setFile] = useState();
     function handleChange(e) {
@@ -7,6 +8,10 @@ function Detect() {
         setFile(URL.createObjectURL(e.target.files[0]));
     }
   return (
+    <>
+    <div className="w-full h-screen bg-[url('https://img.freepik.com/premium-vector/realistic-background-with-green-tea-leaves-flying-wind-nature-fresh-effect-with-herbal-leaf-air-organic-tea-plantation-vector-banner-foliage-motion-falling-down-blowing-wind_102902-4858.jpg?w=2000')] bg-cover flex items-center mt-[-78px]">
+      
+    </div>
     
 
        <div className='mt-5 ml-5 mr-5'>
@@ -17,7 +22,7 @@ function Detect() {
         <button className='w-20 py-2 my-4 rounded-lg bg-lime-300' type="submit">Detect</button>  
        </form>
        </div>
-      
+     </>
           
   )
 }
