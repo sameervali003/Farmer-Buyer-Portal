@@ -1,6 +1,5 @@
 import React from 'react'
 import pic2 from "../assets/pic2.jpg";
-import DropdownButton from '../components/DropdownButton';
 
 function About() {
   return (
@@ -13,7 +12,6 @@ function About() {
         <p class="mb-3 font-normal text-gray-700">Food security for billions of people on earth requires minimizing crop damage by timely detection of diseases.Developing methods for detection of plant diseases serves the dual purpose of increasing crop yield and reducing pesticide use without knowing about the proper disease. Along with development of better crop varieties, disease detection is thus paramount goal for achieving food security.</p>
       </div>
       </a>
-
     </div>
     
 
