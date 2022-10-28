@@ -55,10 +55,10 @@ function Profile() {
     useEffect(() => {
       if (loginStatus) {
         const number = Number(account.substring(3));
-        axios.get('/api/location', { params: { number: number } })
+        axios.get('/api/user', { params: { number: number } })
         .then((res) => {
           console.log(res.data)
-          const { city, state } = res.data
+          const { city, state } = res.data.savedUser
           if (city && state) {
             setMyCity(city)
             setMyState(state)
@@ -73,10 +73,6 @@ function Profile() {
           setLoading(false)
         }
         )}
-        else {
-          alert("Please login!")
-          navigate("/login")
-        }
     }, [account, loginStatus])
 
     function locationChange() {
@@ -89,7 +85,7 @@ function Profile() {
       }
     }
 
-    return !loading ? (
+    return !loading && loginStatus ? (
     <>
     <div className="mt-10 mx-10">
         <h1 className='font-serif text-base'> Login Information </h1>

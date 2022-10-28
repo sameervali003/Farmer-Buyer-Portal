@@ -76,7 +76,7 @@ const NavBar = () => {
                 <Button func={navigateLogin}>Login</Button>
               ) :
               (
-                <DropdownButton menuItems={[{name: "Profile", href: "/profile"}, {name: "Logout", href: "/logout"}]}>User</DropdownButton>
+                <DropdownButton />
               )
             }
           </li>
