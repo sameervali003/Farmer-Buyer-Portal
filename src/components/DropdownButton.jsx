@@ -32,8 +32,8 @@ const DropdownButton = () => {
         </div>
 
         {open && 
-          <div className="block md:fixed md:right-10 w-40 h-40 bg-black mt-2">
-        <ul aria-labelledby="dropdownDefault" className="py-1 text-sm text-white rounded">
+          <div className="block md:fixed md:right-10 w-40 h-32 bg-white mt-2">
+        <ul aria-labelledby="dropdownDefault" className="py-1 text-sm text-black rounded">
             <li className='block py-2 px-4 hover:bg-gray-600' onClick={() => navigate("/profile")}>Profile</li>
             <li className='block py-2 px-4 hover:bg-gray-600' onClick={() => navigate("/mytools")}>My Tools</li>
             <li className='block py-2 px-4 hover:bg-gray-600' onClick={logout}>Sign out</li>

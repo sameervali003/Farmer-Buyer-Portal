@@ -39,7 +39,7 @@ const ProductCard = ({ description, type, owner, file, price, id }) => {
     }
 
     return (
-        <div className=" max-w-xs  bg-white rounded-lg shadow-md dark:bg-gray-400 dark:border-gray-700">
+        <div className=" max-w-xs  rounded-lg shadow-md bg-slate-50">
         <img className="rounded-t-lg" src={image} alt="" />
         <div className="px-2 pb-2">
             <h5 className=" py-2 text-sm font-semibold tracking-tight text-gray-900 dark:text-white">{type}</h5>
