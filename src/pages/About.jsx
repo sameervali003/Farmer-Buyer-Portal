@@ -1,11 +1,11 @@
 import React from 'react'
 import pic2 from "../assets/pic2.jpg";
+import DropdownButton from '../components/DropdownButton';
 
 function About() {
   return (
     
-    <div className="my-36 mx-96 ">
-        
+    <div className="my-36 mx-96 ">    
       <a href="#" class="flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl hover:bg-gray-100">
       <img class="object-cover w-full  rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" src={pic2} alt=""/>
       <div class="flex flex-col justify-between p-4 leading-normal">
