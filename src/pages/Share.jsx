@@ -3,6 +3,7 @@ import axios from "axios";
 import { LoginContext } from "../contexts/LoginContext";
 import { states, s_a } from "../utils/cities";
 import ProductCard from "../components/ProductCard";
+import Loading from '../components/Loading';
 
 const Share = () => {
   function navigateLand() {
@@ -73,7 +74,7 @@ const Share = () => {
 
   return !loading ? (
     <>
-    <div className="bg-gradient-to-l from-teal-100 via-violet-100 to-lime-200">
+    <div className="">
       <div className="grid grid-cols-7  gap-2 mx-2 mb-2 mt-5 ">
         {tools.map((tool, index) => (
           <button
@@ -113,7 +114,7 @@ const Share = () => {
           </select>
         </div>
         <div>
-          <label className="mt-4 font-sans block">My City</label>
+          <label className="mt-4 font-mono block">My City</label>
           <select
             className="border-2 border-gray-300 p-2 rounded-lg mt-4 w-full"
             defaultValue={myCity}
@@ -144,7 +145,7 @@ const Share = () => {
         ))}
       </div>
     </>
-  ) : (<h1>Loading...</h1>);
+  ) : (<Loading />);
 };
 
 export default Share;

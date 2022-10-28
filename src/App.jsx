@@ -2,7 +2,6 @@ import React from "react"
 import NavBar from "./components/NavBar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import About from "./pages/About";
 import Login from "./pages/Login";
 import Detect from "./pages/Detect";
 import Share from "./pages/Share";
@@ -21,7 +20,7 @@ function App() {
           <Route exact path="login" element={<Login />} />
           <Route element={<NavBar/>}>
           <Route exact path="/" element={<Home />} />
-          <Route exact path="about" element={<About />} />
+          <Route exact path="about" element={<Home />} />
           <Route exact path="detect" element={<Detect />} />
           <Route exact path="share" element={<Share />} />
           <Route exact path="profile" element={<Profile />} />
