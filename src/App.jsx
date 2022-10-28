@@ -8,6 +8,7 @@ import Detect from "./pages/Detect";
 import Share from "./pages/Share";
 import Profile from "./pages/Profile";
 import Lend from "./pages/Lend";
+import Tool from "./pages/Tool";
 import { LoginProvider } from "./contexts/LoginContext";
 
 
@@ -24,6 +25,7 @@ function App() {
           <Route exact path="share" element={<Share />} />
           <Route exact path="profile" element={<Profile />} />
           <Route exact path="lend" element={<Lend />} />
+          <Route exact path="tool/:id" element={<Tool />} />
           </Route> 
         </Routes>
       </BrowserRouter>

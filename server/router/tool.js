@@ -48,15 +48,18 @@ router.post("/api/tool", upload.single("file"), (req, res) => {
   }
 });
 
-// get all tools by the owner
+// get tools by filter
 router.get("/api/tool", (req, res) => {
-  const { owner, type } = req.query;
+  const { owner, type, sold } = req.query;
   const filter = {}
   if (owner) {
     filter.owner = owner;
   }
   if (type) {
     filter.type = type;
+  }
+  if (sold) {
+    filter.sold = sold;
   }
   Tool.find(filter).then((savedTools) => {
     if (!savedTools) {
