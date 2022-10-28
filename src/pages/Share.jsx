@@ -20,18 +20,22 @@ const Share = () => {
 
   useEffect(() => {
     setLoading(true)
+    setProds([])
     axios
       .get("/api/tool", {
         params: {
-          type: type,
-          sold: false,
-        },
+          type: type
+        }
       })
       .then((response) => {
         const savedTools = response.data.savedTools;
         let filteredTools = [];
-        
-        if (myCity !== undefined) {savedTools.forEach((tool, index) => {
+        if (myCity !== undefined) {
+          if (savedTools.length === 0) {
+            console.log("No tools found")
+            setLoading(false)
+          } 
+          savedTools.forEach((tool, index) => {
           axios
             .get("/api/user", {
               params: {
@@ -41,13 +45,12 @@ const Share = () => {
             .then((response) => {
               const user = response.data.savedUser;
               const city = user.city;
-              if (city == myCity) {
+              if (city === myCity) {
                 filteredTools.push(tool);
               }
-              if (index == savedTools.length - 1) {
+              if (index === savedTools.length - 1) {
                 setProds(filteredTools);
                 setLoading(false)
-                console.log(filteredTools);
               }
             })
             .catch((err) => console.log(err));
@@ -56,7 +59,7 @@ const Share = () => {
         setProds(savedTools)
         setLoading(false)
        }
-      }) 
+    }) 
   }, [type, myCity]);
 
   const tools = [
@@ -127,8 +130,8 @@ const Share = () => {
         </div>
       </div>
 
-      <div className="px-2 pb-2 grid grid-cols-4  gap-4 my-4 mx-4">
-        {prods.map((prod, index) => (
+      <div className="px-2 pb-2 grid md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-2 my-2 mx-2">
+        {prods.length === 0 ? <h1>No tools here!!!</h1> : prods.map((prod, index) => (
           <ProductCard
             className="px-5 w-60 h-100"
             key={index}
