@@ -47,7 +47,7 @@ router.put("/api/user", async (req, res)=> {
     if (!number || !state || !city) {
         return res.status(422).json({error: "Please add all the fields"})
     }
-    
+
     const filter = { number }
     const update = { state, city }
     try {
