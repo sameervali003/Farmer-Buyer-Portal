@@ -48,7 +48,7 @@ const Tool = () => {
   
         </div>
 </div>
-    ) : <Loading className="mt-90" />;
+    ) : <Loading/>;
 }
 
 export default Tool
