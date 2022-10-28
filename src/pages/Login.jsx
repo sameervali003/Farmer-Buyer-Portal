@@ -60,7 +60,7 @@ const Login = () => {
           setLoginStatus(true);
 
           axios
-            .post("/api/login", {
+            .put("/api/login", {
               number: Number(user.phoneNumber.substring(3)),
             })
             .then(
