@@ -7,10 +7,10 @@ const Lend = () => {
   [
     "Tractors",
     "Harvestor",
-    "plough",
+    "Plough",
     "Ripper Machine",
     "Thresher",
-    "sead drill"
+    "Seed Drill"
   ]
 
   const [uid, setUid] = useState()
