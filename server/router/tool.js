@@ -50,18 +50,7 @@ router.post("/api/tool", upload.single("file"), (req, res) => {
 
 // get tools by filter
 router.get("/api/tool", (req, res) => {
-  const { owner, type, sold } = req.query;
-  const filter = {}
-  if (owner) {
-    filter.owner = owner;
-  }
-  if (type) {
-    filter.type = type;
-  }
-  if (sold) {
-    filter.sold = sold;
-  }
-  Tool.find(filter).then((savedTools) => {
+  Tool.find(req.query).then((savedTools) => {
     if (!savedTools) {
       return res.status(422).json({ error: "No tools found" });
     }

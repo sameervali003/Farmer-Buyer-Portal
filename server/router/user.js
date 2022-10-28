@@ -33,11 +33,7 @@ router.post("/api/user", (req, res)=> {
 
 // get user info
 router.get("/api/user", (req, res)=> {
-    const { number } = req.query
-    if (!number) {
-        return res.status(422).json({ error: "Please specify a number" })
-    }
-    User.findOne({ number: number }).then((savedUser) => {
+    User.findOne(req.query).then((savedUser) => {
         if (!savedUser) {
             return res.status(422).json({ error: "User doesn't exist" })
         }
