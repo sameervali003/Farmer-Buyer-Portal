@@ -29,13 +29,13 @@ const Share = () => {
             Thresher
         </button>
         <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded ml-14">
-            sead drill
+            seed drill
         </button>
         </div>
         <div className="w-20 h-20   right-0 bottom-0 my-10 mx-12 fixed"> 
         <button className="bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br text-white font-bold py-2 px-4 rounded-full" onClick={navigateLand}>+</button>
         </div>
-        <div className="grid grid-cols-4 gap-2 mt-2 mx-2 mb-2 ">
+        <div className="grid lg:grid-cols-2  sm:grid-cols-4 gap-2 mt-2 mx-2 mb-2 ">
         <div class="px-2 pb-2">
             <ProductCard className="px-5 w-60 h-100"> </ProductCard>
         </div>
