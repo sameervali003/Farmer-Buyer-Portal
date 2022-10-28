@@ -14,6 +14,6 @@ app.use(require('./router/user'))
 app.use(require('./router/tool'))
 app.use(require('./router/orders'))
 
-app.listen(5000, () => {
-    console.log("Running on port: 5000");
+app.listen(6000, () => {
+    console.log("Running on port: 6000");
 })
