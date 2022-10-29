@@ -13,7 +13,7 @@ const Home = () => {
           </div>
         </div>
 
-        <div className='mt-10'>
+        <div className='mt-10' id="#about">
           <div className='md:mx-40 sm:mx-20 2xs:mx-10'>
             <h1 className='text-3xl text-slate-400 text-opacity-90 mb-4'> What we do </h1>
             <p className='text-xl text-slate-400 text-opacity-70'>Our goal is to provide utilitarian services, which can make them more productive, like detecting diseases, and to create a platform where farmers can share their resources with their peers.</p>

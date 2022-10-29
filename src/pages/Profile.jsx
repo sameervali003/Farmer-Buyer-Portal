@@ -75,9 +75,9 @@ function Profile() {
                 }
                 </select>
 
-                <button className="w-1/3 bg-blue-500 text-white px-4 py-2 rounded font-medium mt-6" type="button" onClick={locationChange}>Update Location</button>
+                <button className="w-full sm:w-1/3 bg-blue-500 text-white px-4 py-2 rounded font-medium mt-6" type="button" onClick={locationChange}>Update Location</button>
 
-                <button className="w-1/3 py-2 my-4 rounded-lg bg-green-400 to-blue-500 hover:bg-green-500" onClick={() => {
+                <button className="w-full sm:w-1/3 py-2 my-4 rounded-lg bg-green-400 to-blue-500 hover:bg-green-500" onClick={() => {
                     localStorage.removeItem("loginStatus")
                     localStorage.removeItem("account")
                     setLoginStatus(false)

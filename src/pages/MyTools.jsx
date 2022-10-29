@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useContext, useState, useEffect } from 'react'
 import DeleteCard from "../components/DeleteCard";
 import { LoginContext } from "../contexts/LoginContext";
+import Loading from '../components/Loading';
 
 
 function MyTools() {
@@ -58,7 +59,7 @@ function MyTools() {
         )}
         </div>
         </>
-    ) : (<h1>Loading...</h1>)
+    ) : (<Loading/>)
     }
 
 export default MyTools

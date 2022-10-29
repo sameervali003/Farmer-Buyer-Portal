@@ -75,7 +75,7 @@ const Share = () => {
   return !loading ? (
     <>
     <div className="">
-      <div className="grid grid-cols-7  gap-2 mx-2 mb-2 mt-5 ">
+      <div className="grid 2sm:grid-cols-7 grid-cols-3 gap-2 mx-2 mb-2 mt-5 ">
         {tools.map((tool, index) => (
           <button
             key={index}
@@ -130,7 +130,7 @@ const Share = () => {
         </div>
       </div>
 
-      <div className="px-2 pb-2 grid md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-2 my-2 mx-2">
+      <div className="px-2 pb-2 grid md:grid-cols-5 sm:grid-cols-4 grid-cols-2 gap-2 my-2 mx-2">
         {prods.length === 0 ? <h1>No tools here!!!</h1> : prods.map((prod, index) => (
           <ProductCard
             className="px-5 w-60 h-100"

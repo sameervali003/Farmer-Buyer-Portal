@@ -10,6 +10,7 @@ module.exports = {
       '2xs': '250px',
       'xs': '300px',
       'sm': '420px',
+      '2sm': '700px',
     }
   },
   plugins: [],
