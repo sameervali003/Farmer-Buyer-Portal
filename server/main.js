@@ -13,6 +13,7 @@ app.use(express.json());
 app.use(require('./router/user'))
 app.use(require('./router/tool'))
 app.use(require('./router/orders'))
+app.use(require('./router/crop'))
 
 app.listen(6000, () => {
     console.log("Running on port: 6000");
