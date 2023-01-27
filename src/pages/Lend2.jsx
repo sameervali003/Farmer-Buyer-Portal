@@ -2,18 +2,24 @@ import React, { useState, useContext, useEffect } from "react";
 import axios from 'axios';
 import { LoginContext } from "../contexts/LoginContext";
 
-const Lend = () => {
-  var products = 
+const Lend2 = () => {
+  var crops = 
   [
-    "Tractors",
-    "Harvestor",
-    "Plough",
-    "Ripper Machine",
-    "Thresher",
-    "Seed Drill"
+    "Wheat",
+    "Rice",
+    "SugarCane",
+    "Maize",
+    "Jower",
+    "Bajra",
+    "Corn",
+    "Red gram",
+    "Cotton",
+    "Soybean",
+    "Groundnut",
+    "Millets",
+    "Jute",
+    "Coffee"
   ]
-
-  
 
   const [uid, setUid] = useState()
  
@@ -35,56 +41,56 @@ const Lend = () => {
     <>
       <div className="mt-10 ml-5 mr-5">
         <h1 className="block mb-2 text-sm font-medium text-gray-900">
-          Lending Form
+         Crop Lending Form
         </h1>
-        <form action="/api/tool" method="post" encType="multipart/form-data">
+        <form action="/api/crop" method="post" encType="multipart/form-data">
             <input type="text" name="owner" value={uid} readOnly className="hidden"/>
           <div className="flex flex-col">
             <label className="block mb-2 text-sm font-medium text-gray-900 ">
-              Product Name
+              Crop Name
             </label>
             <input
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               type="text" name="name"
-              placeholder="Enter your Product Name"
+              placeholder="Enter your Crop Name"
             />
 
             <label className="block mb-2 mt-2 text-sm font-medium text-gray-900 ">
-              Select your product from the list below
+              Select your Crop from the list below
             </label>
             <select className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" name="type">
-              {products.map((product, index) => (
-                <option key={index} value={product}>
+              {crops.map((crop, index) => (
+                <option key={index} value={crop}>
                   {" "}
-                  {product}
+                  {crop}
                 </option>
               ))}
             </select>
 
             <label className="block mb-2 mt-2 text-sm font-medium text-gray-900 ">
-              Product Description
+              Crop Description
             </label>
             <textarea
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-              placeholder="Enter your Product Description" name="description"
+              placeholder="Enter your Crop Description" name="description"
             ></textarea>
 
             <label className="block mb-2 mt-2 text-sm font-medium text-gray-900 ">
-              Product Rent per week
+                Crop cost per acre
             </label>
             <input
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               type="text" name="price"
-              placeholder="Enter your Product Cost"
+              placeholder="Enter your Crop cost per acre"
             />
 
             <label className="block mb-2 mt-2 text-sm font-medium text-gray-900 ">
-              Product Image
+              Crop Image
             </label>
             <input
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               type="file" name="file"
-              placeholder="Enter your Product Image"
+              placeholder="Enter your Crop Image"
             />
 
             <button
@@ -99,4 +105,4 @@ const Lend = () => {
     </>
   ) : (<h1>Login First!!</h1>)
 } 
-export default Lend;
+export default Lend2;

@@ -1,12 +1,11 @@
 const mongoose = require("mongoose")
 
-const ToolSchema = new mongoose.Schema(
+const CropSchema = new mongoose.Schema(
     {
         owner: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "USER",
             required: true
-            
         },
         type: {
             type: String,
@@ -28,6 +27,5 @@ const ToolSchema = new mongoose.Schema(
     { timestamps: true }
 )
 
-const Tool = mongoose.model("TOOL", ToolSchema)
-
-module.exports = Tool
+const Crop = mongoose.model("CROP", CropSchema)
+module.exports = Crop

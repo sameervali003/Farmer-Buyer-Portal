@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState,useContext } from "react";
 import DropdownButton from "./DropdownButton";
 import { useNavigate } from "react-router-dom";
 import { Outlet } from 'react-router';
@@ -13,9 +13,10 @@ const NavBar = () => {
 
   let Links = [
     { name: "HOME", link: "/" },
-    { name: "ABOUT", link: "/about" },
+    { name: "ABOUT", link: "#about" },
     { name: "DISEASE DETECTION", link: "/detect" },
     { name: "SHARE", link: "/share" },
+    {name:"SELL" ,link:"/sell"}
   ];
 
   let [open, setOpen] = useState(false);
@@ -60,11 +61,11 @@ const NavBar = () => {
           {Links.map((link) => (
             <li
               key={link.name}
-              className="md:ml-8 text-l md:my-0 my-7 font-sans"
+              className="block py-2 pl-3 pr-4 text-gray-700 rounded border-0 hover:text-green-400 md:p-0 md:mx-2 font-bold"
             >
               <a
                 href={link.link}
-                className="text-gray-800 hover:text-black duration-500"
+                className="block py-2 pl-3 pr-4 text-gray-700 rounded border-0 hover:text-cyan-400 md:p-0 md:mx-2 font-sans"
               >
                 {link.name}
               </a>
