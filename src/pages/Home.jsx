@@ -1,8 +1,9 @@
 import Button from '../components/Button';
-
+import NavBar from '../components/NavBar';
 const Home = () => {
     return (
       <>
+       <NavBar />
         <div className="w-full h-screen bg-[url('https://wallpaperaccess.com/full/1164171.jpg')] bg-cover flex items-center mt-[-78px]">
           <div className="md:mx-40 sm:mx-20 2xs:mx-10 select-none">
           <h2 className="xs:text-2xl text-xl text-white text-opacity-70">Make it easy</h2>
@@ -29,21 +30,7 @@ const Home = () => {
           {" "}
           We want to build app which every farmer in the country to utilize the immensely useful features. Starting with the proactive feature of detecting diseases, to sharing resources among the other farmers in the community, to selling their yield directly to the customers. We hope this user-friendly app will help them in making prudent decisions and increase their yield to the maximum.{" "}
         </p>
-        <h1 className="mt-5 text-3xl text-orange-900 font-bold ">OUR TEAM</h1>
-       
         <br />
-        <ul className="list-disc list-inside">
-          <li>Sai Gopal</li>
-          <li>Hemanth</li>
-          <li>Saran</li>
-          <li>Avinash</li>
-          <li>Pranav</li>
-          <li>Rakshit</li>
-          <li>Rahul</li>
-          <li className='mb-8'>Jeshwanth</li>
-  
-        </ul>
-
         
       </div>
       </>

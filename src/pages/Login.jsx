@@ -1,155 +1,81 @@
-import trees from "../assets/trees.jpeg";
-import { authentication } from "../firebase";
-import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
+import React, { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { useUser } from '../usercontent';
+import './login.css';
 
-import { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import { LoginContext } from "../contexts/LoginContext";
+function LoginForm() {
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const { setUser } = useUser(); // Get setUser from context
 
-import axios from "axios";
-
-const Login = () => {
-  const [number, setNumber] = useState();
-  const [expandForm, setExpandForm] = useState(false);
-  const [otp, setOtp] = useState();
-
-  const generateRecaptcha = () => {
-    window.recaptchaVerifier = new RecaptchaVerifier(
-      "recaptcha-container",
-      {
-        size: "invisible",
-        callback: (response) => {
-          // reCAPTCHA solved, allow signInWithPhoneNumber.
-        },
-      },
-      authentication
-    );
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const getOtp = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (number.length === 10) {
-      setExpandForm(true);
-      generateRecaptcha();
-      let appVerifier = window.recaptchaVerifier;
-      console.log("+91" + number);
-      signInWithPhoneNumber(authentication, "+91" + number, appVerifier)
-        .then((confirmationResult) => {
-          window.confirmationResult = confirmationResult;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+
+    if (loading) {
+      alert('Request in progress, please wait');
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const response = await axios.post('http://localhost:5000/api/login', formData);
+      console.log(response);
+      if (response.data.success) {
+        setUser(response.data.user); // Store user data in context
+        if (response.data.user.type === "Buyer") {
+          navigate('/buyer_dashboard');
+        } else {
+          navigate('/farmer_dashboard');
+        }
+      } else {
+        alert('Login Failed');
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      alert('An error occurred while logging in');
+    } finally {
+      setLoading(false);
     }
   };
 
-  const navigate = useNavigate();
-  const { setAccount, setLoginStatus, loginStatus } = useContext(LoginContext);
-
-  const verifyOtp = () => {
-    console.log(otp);
-    
-      let confirmationResult = window.confirmationResult;
-      confirmationResult
-        .confirm(otp)
-        .then((result) => {
-          // User signed in successfully.
-          const user = result.user;
-          console.log(user.phoneNumber);
-          setAccount(user.phoneNumber);
-          setLoginStatus(true);
-
-          axios
-            .post("/api/user", {
-              number: Number(user.phoneNumber.substring(3)),
-            })
-            .then(
-              (response) => {
-                console.log(response);
-              },
-              (error) => {
-                console.log(error);
-              }
-            );
-
-          navigate("/");
-        })
-        .catch((error) => {
-          alert("Wrong OTP");
-          console.log(error);
-        });
-  };
-
-  return !loginStatus ? (
-    <div className="w-full h-screen flex bg-gradient-to-r from-green-400 to-blue-500">
-      <div className="grid grid-cols-1 md:grid-cols-2 m-auto h-[550px] shadow-lg shadow-gray-600 sm:max-w-[900px] bg-white">
-        <div className="w-full h-[550px] hidden md:block">
-          <img className="w-full h-full" src={trees} alt="/" />
-        </div>
-        <div className="p-4 flex flex-col justify-around">
-          <form onSubmit={(e) => e.preventDefault()}>
-            <h2 className="text-4xl font-bold text-center mb-8">
-              Login/Signup
-            </h2>
-
-            <div>
-              <label className="text-xl font-semibold">Phone Number</label>
-              <div className="w-full border-2 border-gray-300 p-2 rounded-lg mt-2">
-                <span className="pr-1">+91</span>
-                <input
-                  className="outline-none bg-white"
-                  type="text" inputmode="numeric"
-                  name="mobile"
-                  placeholder="Enter your phone number"
-                  required
-                  onChange={(e) => setNumber(e.target.value)}
-                />
-              </div>
-            </div>
-
-            {expandForm === true ? (
-              <>
-                <div className="my-3">
-                  <label className="text-xl font-semibold ">
-                    {" "}
-                    Please Enter Otp
-                  </label>
-                  <input
-                    className="w-full border-2 border-gray-300 p-2 rounded-lg mt-2"
-                    type="text"
-                    name="otp"
-                    placeholder="Enter your otp"
-                    required
-                    onChange={(e) => setOtp(e.target.value)}
-                  />
-                </div>
-
-                <button
-                  className="w-full py-2 my-4 rounded-lg bg-green-400 to-blue-500 hover:bg-green-500"
-                  onClick={verifyOtp}
-                >
-                  Verify
-                </button>
-              </>
-            ) : null}
-            {expandForm === false ? (
-              <button
-                className="w-full py-2 my-4 rounded-lg bg-green-400 to-blue-500 hover:bg-green-500"
-                onClick={getOtp}
-              >
-                Generate Otp
-              </button>
-            ) : null}
-            <div id="recaptcha-container"></div>
-          </form>
-        </div>
+  return (
+    <div className="login-container">
+      <div className="login-form">
+        <h2 className="login-title">Login</h2>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            onChange={handleChange}
+            required
+            className="login-input"
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            onChange={handleChange}
+            required
+            className="login-input"
+          />
+          <button type="submit" className="login-button" disabled={loading}>
+            {loading ? 'Logging In...' : 'Login'}
+          </button>
+        </form>
       </div>
     </div>
-  ) : (
-    <>
-      <h1>You are logged in!!</h1>
-    </>
   );
-};
+}
 
-export default Login;
+export default LoginForm;

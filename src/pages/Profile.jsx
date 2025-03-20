@@ -91,4 +91,4 @@ function Profile() {
   ): (<h1>Loading!!!</h1>)
 }
 
-export default Profile
+export default Profile;

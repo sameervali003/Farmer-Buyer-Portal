@@ -12,7 +12,7 @@ const DropdownButton = () => {
   function logout() {
     localStorage.removeItem("loginStatus")
     localStorage.removeItem("account")
-    setLoginStatus(false)
+//    setLoginStatus(false)
     window.location.reload(false)
   }
 
